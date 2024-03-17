@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>stopwatch</title>
+    <style>
+        .container{
+            align-items:center;
+            height: 200px;
+            width: 300px;
+            display: flex;
+            justify-content:center;
+            background-image: url("bg.jpg");
+            background-repeat: no-repeat;
+            opacity: 10;
+            background-size: 300px 200px;
+            border-radius: 20px;
+            color: rgb(255, 248, 251);
+            margin-left: 40em;
+            margin-top: 10em;
+        }
+        .container img{
+            height: 40px;
+          
+            margin: 20px; 
+            
+        }
+        .container img:hover{
+          cursor: pointer;
+          opacity : 0.5;
+        }
+        body{
+          margin: 0;
+          padding: 0;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+  <img src="stop.png" onclick="watchstop()">
+    <h1 id="displayTime">00:00:00</h1>
+    <img src="play.png" onclick ="watchStart()">
+</div>
+ <script>
+        // Timer 
+let [ seconds,minutes,hours ] = [0,0,0];
+let displayTime = document.getElementById("displayTime");
+let timer = null;
+function stopwatch(){
+  seconds++
+  if(seconds == 60){
+    seconds = 0;
+    minutes++;
+    if(minutes == 60){
+      minutes = 0;
+      hours++;
+    }
+    }
+    let h = hours < 10 ? "0" + hours : hours;
+    let m = minutes < 10 ? "0" + minutes : minutes;
+    let s = seconds < 10 ? "0" + seconds : seconds;
+    displayTime.innerHTML = h +":"+ m +":"+ s;
+  }
+
+  function watchStart(){
+    if(timer!== null)
+    {
+      clearInterval(timer);
+    }
+    timer = setInterval(stopwatch,1000);
+  }
+  function watchstop(){
+      clearInterval(timer);
+  }
+    </script>
+</body>
+</html>
